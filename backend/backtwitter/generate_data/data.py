@@ -21,6 +21,7 @@ class AccountData():
   AccountCreationDate = ""
   AccountAgeInDay = 0
   AccountUsername = ""
+  ProfilePicture = ""
   Nb_of_dm_send = 0
   Nb_of_dm_received = 0
   Nb_of_tweet_total = 0
@@ -196,6 +197,7 @@ def twitter_account_info():
   print("Inside twitter_account_info function")
   #print("Start")
   basic_account_data(data)
+  get_profile_picture(data)
   number_of_dm(data)
   number_of_tweet(data)
   number_of_block(data)
@@ -217,6 +219,7 @@ def write_data_to_json(data):
     "AccountCreationDate": data.AccountCreationDate,
     "AccountAgeInDay": data.AccountAgeInDay,
     "AccountUsername": data.AccountUsername,
+    "ProfilePicture" : data.ProfilePicture,
     "Nb_of_dm_send": data.Nb_of_dm_send,
     "Nb_of_dm_received": data.Nb_of_dm_received,
     "Nb_of_tweet_total": data.Nb_of_tweet_total,
@@ -284,6 +287,9 @@ def write_data_to_json(data):
   with open("generate_data/data.json", "w") as outfile:
       outfile.write(json_object)
 
+def get_profile_picture(data):
+  f = str(print_file_info(r'generate_data\twitter_data\data\profile.js').replace('"',"").split("avatarMediaUrl")[1]).split("\n")[0].replace(":","").replace(",","").replace(" " ,"")
+  data.ProfilePicture = f
 
 def basic_account_data(data):
   f = print_file_info(r'generate_data\twitter_data\data\account.js').split("\n") 
