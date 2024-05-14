@@ -59,7 +59,8 @@ h2 {
   border-radius: 10px;
   background-color: #f9f9f9;
   width: fit-content;
-  margin: 20px; /* Centering the rectangle horizontally */
+  margin: 80px 20px 80px auto; /* Adjusting the margin to move more to the right */
+
   text-align: center; /* Centering the content inside the rectangle */
 }
 
@@ -93,13 +94,53 @@ h2 {
   text-align: center; /* Centering the content inside the rectangle */
 }
 
-.longrectangle {
+.likd5tweeterectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 430px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.followrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 150px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.blockrectangle {
   border: 10px solid black;
   padding: 20px;
   border-radius: 10px;
   background-color: #f9f9f9;
   width: fit-content;
   margin: 80px 400px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.actionrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 10px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.longrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 350px 80px auto; /* Adjusting the margin to move more to the right */
   text-align: center; /* Centering the content inside the rectangle */
 }
 
@@ -134,6 +175,14 @@ h2 {
   font-size: 20px;
   color: #000000DF;
   font-weight: 800;
+}
+
+.ligh5text {
+  font-family: 'Arial';
+  font-size: 20px;
+  color: #000000DF;
+  font-weight: 800;
+  margin-left: 20px;
 }
 
 .lightext2 {
