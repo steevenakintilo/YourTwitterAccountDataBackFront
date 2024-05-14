@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { Component } from "react";
 import "./styles.css"; // assuming your CSS file is named styles.css
 import "./data.css"; // assuming your CSS file is named styles.css
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 
 class StartPage extends Component {
@@ -89,6 +88,7 @@ class StartPage extends Component {
           <div className="backgroundcolour">
             <h1 className="styles.body">Upload ton archive twitter puis clique sur envoyer</h1>
             <br></br>
+            
             <a className="styles.body" href="https://help.twitter.com/fr/managing-your-account/how-to-download-your-x-archive" target="_blank"> Clique ici pour télécharger ton archive </a>
             <br></br>
             <br></br>
@@ -121,7 +121,7 @@ class StartPage extends Component {
             <h4><span className="lightext">Ton username est </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountUsername}</span></h4> 
             <h4><span className="lightext">L'ID de ton compte est </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountId}</span></h4> 
             <h4><span className="lightext">Tu as crée ton compte le </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountCreationDate}</span></h4> 
-            <h4><span className="lightext">Ton compte a  </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountAgeInDay}</span> <span className="lightext" jours></span></h4> 
+            <h4><span className="lightext">Ton compte a  </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountAgeInDay}</span> jours <span className="lightext" jours></span></h4> 
           </div>
           <div className="container">
             <div className="rectangle">
@@ -171,7 +171,45 @@ class StartPage extends Component {
               <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_like_on_average} </span> <span class="lightext1"> likes par tweets</span></h4> 
               <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_rt_on_average} </span> <span class="lightext1"> rts par tweets</span></h4> 
           </div>
-            
+          <div className="lightext">Top 5 de tes tweets les plus liké</div>
+          <ul>
+            {this.state.TwitterData.jsonData.Top5MostLikedTweetUrl.slice(0, 5).map((tweetID, index) => (
+                <li key={index}>
+                  <a className="styles.body" href={tweetID} target="_blank"> Clique ici pour le voir </a>
+                </li>
+              ))}
+            <br></br>
+          </ul>
+          <ul>
+            <div className="textrectangle">
+              <h4><span className="lightext">Depuis la création de ton compte tu as répondu à</span> <span className="lightext2"> {this.state.TwitterData.jsonData.UniqueRepliedUser} </span> personnes différentes</h4> 
+              <h4 className="lightext">Voici le top 5 des personnes à qui tu as le plus répondu</h4>
+              {this.state.TwitterData.jsonData.Top5RepliedUser.slice(0, 5).map((user, index) => (
+                <li key={index}>
+                  <h4><span className="lightext">Tu as répondu </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5RepliedUserNb[index]} </span> <span className="lightext"> fois à </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5RepliedUser[index]} </span> <span className="lightext"> ce qui fait </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5RepliedUserPercent[index]} </span> <span className="lightext"> % de tes commentaires </span></h4>
+                </li>
+              ))}
+            </div>
+          </ul>
+          <br></br>
+          <ul>
+            <div className="dmrectangle">
+              <h4><span className="lightext">Tu as dm</span> <span className="lightext2"> {this.state.TwitterData.jsonData.UniqueDMedUser} </span> personnes différentes</h4> 
+              <h4><span className="lightext">Tu as reçu</span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_dm_received} </span> dm et tu en as envoyé <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_dm_send} </span></h4> 
+              <h4 className="lightext">Voici le top 5 des personnes à qui tu as le plus parlé en dm</h4>
+              {this.state.TwitterData.jsonData.Top5RepliedUser.slice(0, 5).map((user, index) => (
+                <li key={index}>
+                  <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUser[index]} </span> <span className="lightext"> : </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserNb[index]} </span> <span className="lightext"> ce qui représente </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserPercent[index]} </span> <span className="lightext"> % de tes dm </span></h4>
+                </li>
+              ))}
+              <h4><span className="lightext">Tu as donc envoyé en moyenne </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_dm_send_on_average} </span> <span className="lightext"> dm par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_dm_send_on_average_time} </span> et a reçu <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_dm_received_on_average} </span> <span className="lightext"> dm par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_dm_received_on_average_time} </span></h4>
+            </div>
+          </ul>
+          <br></br>
+          <div className="likerectangle">
+            <h4><span className="lightext">Tu as liké </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_liked} </span> <span class="lightext1"> tweets ce qui fait une moyenne de </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_liked_on_average} </span> <span className="lightext"> likes par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_liked_on_average_time} </span></h4> 
+          </div>
+          
           <ul>            
             {/* <img src={this.state.TwitterData.jsonData.ProfilePicture} alt="Profile Picture" />
              */}

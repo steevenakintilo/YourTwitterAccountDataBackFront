@@ -30,12 +30,6 @@ def retrieve_json_and_get_data(request):
             with open(file_path, 'wb') as destination:
                 for chunk in uploaded_file.chunks():
                     destination.write(chunk)
-            
-            # Remove the existing directory
-            try:
-                shutil.rmtree("generate_data/twitter_data")
-            except Exception as e:
-                pass
 
             # Process the uploaded file
             from generate_data import data
@@ -45,10 +39,7 @@ def retrieve_json_and_get_data(request):
             with open(r"generate_data/data.json") as json_file:
                 jsonData = json.load(json_file)
 
-            # Clear the contents of the JSON file
-            with open(r"generate_data/data.json", 'w') as f:
-                json.dump({}, f)
-
+            os.remove(r"generate_data/data.json")
             return JsonResponse({"jsonData": jsonData, 'message': 'File processed successfully.'})
         except Exception as e:
             print("Error:")
