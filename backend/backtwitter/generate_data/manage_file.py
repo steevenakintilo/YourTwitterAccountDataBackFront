@@ -35,6 +35,14 @@ def get_account_data(full_file,info):
   data = data.split(":")[1].replace('"',"").replace(" ","")
   return data
 
+def current_zip_file():
+  current_file = ""
+  list_of_files = os.listdir("generate_data")
+  for file in list_of_files:
+     if ".zip" in file:
+        current_file = file
+        return current_file
+
 def unzip_file():
   current_file = ""
   list_of_files = os.listdir("generate_data")
@@ -54,8 +62,9 @@ def delete_data():
     except:
       pass
     list_of_files = os.listdir("generate_data")
+    print("thorfin " , list_of_files)
     for file in list_of_files:
       if ".zip" in file:
-          os.remove(r"generate_data/"+file)
+        os.remove(r"generate_data/"+file)
   except:
     pass

@@ -10,13 +10,22 @@ import os
 from datetime import datetime, timedelta, date
 import math
 import traceback
+import zipfile
 
 class AccountData():  
   # if os.path.exists(r'backend\backtwitter\generate_data\twitter_data\data\account-creation-ip.js') == False:  
   #   print("Unziping the file")
   #   unzip_file()
   
-  # f = print_file_info(r'generate_data\twitter_data\data\account.js').split("\n") 
+  # f = print_file_info(r'generate_data\twitter_data\data\account.js').split("\n")
+  fileProfile = ""
+  fileAccount = ""
+  fileDm = ""
+  fileTweets = ""
+  fileBlock = ""
+  fileLike = ""
+  fileFollower = ""
+  fileFollowing = ""
   AccountId = ""
   AccountCreationDate = ""
   AccountAgeInDay = 0
@@ -68,19 +77,19 @@ class AccountData():
   Nb_of_following = 0
   Nb_of_following_on_average = 0
   
-  Nb_of_tweet_made_on_average_time = "day"
-  Nb_of_rt_made_on_average_time = "day"
-  Nb_of_comment_made_on_average_time = "day"
-  Nb_of_all_tweet_made_on_average_time = "day"
-  Nb_of_dm_send_on_average_time = "day"
-  Nb_of_dm_received_on_average_time = "day"
-  Nb_of_tweet_liked_on_average_time = "day"
-  Nb_of_follower_on_average_time = "day"
-  Nb_of_following_on_average_time = "day"
+  Nb_of_tweet_made_on_average_time = "jour"
+  Nb_of_rt_made_on_average_time = "jour"
+  Nb_of_comment_made_on_average_time = "jour"
+  Nb_of_all_tweet_made_on_average_time = "jour"
+  Nb_of_dm_send_on_average_time = "jour"
+  Nb_of_dm_received_on_average_time = "jour"
+  Nb_of_tweet_liked_on_average_time = "jour"
+  Nb_of_follower_on_average_time = "jour"
+  Nb_of_following_on_average_time = "jour"
   
   Nb_of_action = 0
   Nb_of_action_on_average = 0
-  Nb_of_action_time = "day"
+  Nb_of_action_time = "jour"
 
   WholeAccountData = {}
   dataJson = ""
@@ -107,6 +116,30 @@ class SeleniumData():
   login_button_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/div/div'
 
 
+def get_zip_data(data):
+  zip_path = "generate_data/"+current_zip_file()
+  #f = str(print_file_info(r'generate_data\twitter_data\data\profile.js').replace('"',"").split("avatarMediaUrl")[1]).split("\n")[0].replace(":","").replace(",","").replace(" " ,"").strip('')
+  with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+      # List all the contents of the zip file
+      print("Files in the zip archive:")              
+      file_name_list = ["data/profile.js","data/account.js","data/direct-messages.js","data/tweets.js","data/block.js","data/like.js","data/follower.js","data/following.js"]
+      file_content_list = []
+      # Read the content of the specified file
+      for file_name in file_name_list:
+        with zip_ref.open(file_name) as file:
+            content = file.read()
+            file_content_list.append(str(content.decode('utf-8')))
+        
+      data.fileProfile = file_content_list[0]
+      data.fileAccount = file_content_list[1]
+      data.fileDm = file_content_list[2]
+      data.fileTweets = file_content_list[3]
+      data.fileBlock = file_content_list[4]
+      data.fileLike = file_content_list[5]
+      data.fileFollower = file_content_list[6]
+      data.fileFollowing = file_content_list[7]
+      
+
 def account_age(data):
     date_str = str(data.AccountCreationDate)
     today = datetime.now().date()
@@ -115,25 +148,25 @@ def account_age(data):
 
 def is_day_week_month_year_decadade_data(nb):
   r = 0
-  info = "day"
+  info = "jour"
   if nb < 0.9:
     r = nb * 7
-    info = "week"
+    info = "semaine"
     if r < 1:
       r = nb * 31
-      info = "month"
+      info = "mois"
       if r < 1:
         r = nb * 365
-        info = "year"
+        info = "année"
         if r < 1:
           r = nb * 3650
-          info = "decade"
+          info = "décenie"
         if r < 1:
           r = nb * 36500
-          info = "century"
+          info = "siécle"
         if r < 1:
           r = nb * 365000
-          info = "millennium"
+          info = "millénaire"
     return round_nb(r) , info
   else:
     return round(nb,1) , info
@@ -176,7 +209,7 @@ def get_username_from_id(id,idx):
     S = SeleniumData()
     try:
         S.driver.get(f"https://twitter.com/intent/user?user_id={id}")
-        time.sleep(1)
+        time.sleep(1.2)
         current_url = str(S.driver.current_url)
         if idx == 5:
           S.driver.close()
@@ -196,6 +229,7 @@ def twitter_account_info():
   data = AccountData()
   print("Inside twitter_account_info function")
   #print("Start")
+  get_zip_data(data)
   basic_account_data(data)
   get_profile_picture(data)
   number_of_dm(data)
@@ -288,17 +322,21 @@ def write_data_to_json(data):
       outfile.write(json_object)
 
 def get_profile_picture(data):
-  f = str(print_file_info(r'generate_data\twitter_data\data\profile.js').replace('"',"").split("avatarMediaUrl")[1]).split("\n")[0].replace(":","").replace(",","").replace(" " ,"")
+  #f = str(print_file_info(r'generate_data\twitter_data\data\profile.js').replace('"',"").split("avatarMediaUrl")[1]).split("\n")[0].replace(":","").replace(",","").replace(" " ,"").strip('')
+  f = data.fileProfile.replace('"',"").split("avatarMediaUrl")[1].split("\n")[0].replace(":","").replace(",","").replace(" " ,"").strip('')
   data.ProfilePicture = f
 
 def basic_account_data(data):
-  f = print_file_info(r'generate_data\twitter_data\data\account.js').split("\n") 
-  data.AccountId = get_account_data(f,"accountId").replace(",","")
-  data.AccountCreationDate = get_account_creation_date(f)
-  data.AccountUsername = str(get_account_data(f,"username").replace(",","").replace(" ",""))
+  #f = print_file_info(r'generate_data\twitter_data\data\account.js').split("\n")
+  f = data.fileAccount.split("\n")
+  data.AccountId = get_account_data(data.fileAccount.split("\n"),"accountId").replace(",","")
+  data.AccountCreationDate = get_account_creation_date(data.fileAccount.split("\n"))
+  data.AccountUsername = str(get_account_data(data.fileAccount.split("\n"),"username").replace(",","").replace(" ",""))
   
 def number_of_dm(data):
-  f = print_file_info(r'generate_data\twitter_data\data\direct-messages.js').replace('"',"")
+  #f = print_file_info(r'generate_data\twitter_data\data\direct-messages.js').replace('"',"")
+  f = data.fileDm.replace('"',"")
+
   data.Nb_of_dm_send = f.count(f"senderId : {str(data.AccountId)}")
   data.Nb_of_dm_received = f.count(f"recipientId : {str(data.AccountId)}")
   fr = f.split("recipientId")
@@ -346,7 +384,8 @@ def number_of_dm(data):
       data.Top5DMedUserPercent.append(round(float((sorted_list1[-i]/len(list_of_user)) * 100),1))
   
 def number_of_word(data):
-  f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"").split("full_text")
+  #f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"").split("full_text")
+  f = data.fileTweets.replace('"',"").split("full_text")
   list_of_word = []
   unique_word = []
   for Wrd in f:
@@ -373,8 +412,8 @@ def number_of_word(data):
   
   
 def number_of_tweet(data):
-  f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"")
-  
+  #f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"")
+  f = data.fileTweets.replace('"',"")
   data.Nb_of_rt = f.count("full_text : RT")
   data.Nb_of_comment = f.count("full_text : @")
   data.Nb_of_tweet_total = f.count("full_text : ")
@@ -419,24 +458,26 @@ def number_of_tweet(data):
       data.Top5RepliedUserPercent.append(round(float((sorted_list1[-i]/data.Nb_of_comment) * 100),1))
 
 def number_of_block(data):
-  data.Nb_of_account_blocked = str(print_file_info(r'generate_data\twitter_data\data\block.js').replace('"',"")).count("blocking")
+  data.Nb_of_account_blocked = data.fileBlock.replace('"',"").count("blocking")
 
 def number_of_like(data):
-  data.Nb_of_tweet_liked = str(print_file_info(r'generate_data\twitter_data\data\like.js').replace('"',"")).count("expandedUrl")
+  data.Nb_of_tweet_liked = data.fileLike.replace('"',"").count("expandedUrl")
 
 def number_of_follower(data):
-  data.Nb_of_follower = str(print_file_info(r'generate_data\twitter_data\data\follower.js').replace('"',"")).count("follower")
+  data.Nb_of_follower = data.fileFollower.replace('"',"").count("follower")
 
 def number_of_following(data):
-  data.Nb_of_following = str(print_file_info(r'generate_data\twitter_data\data\following.js').replace('"',"")).count("following")
+  data.Nb_of_following = data.fileFollowing.replace('"',"").count("following")
 
 def number_of_like_you_get(data):
-  f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"").split("favorite_count")
+  f = data.fileTweets.replace('"',"").split("favorite_count")
   nb_like = 0
   index = 0
   list_of_tweet = []
   tweet_fav = []
-  for nbLike in f:    
+  idx = 0
+  for nbLike in f:
+    idx +=1    
     userLike = nbLike[0:30].split("\n")[0].replace(",","").replace(":","").replace(" ","")
     try:
       tweetId = str(nbLike).split("in_reply_to_user_id")[0].replace(",","").replace(" ","").split(":")[3].replace("\n","")
@@ -453,6 +494,7 @@ def number_of_like_you_get(data):
           tweet_fav.append(int(userLike))
         except:
           pass
+  
   zipped_lists = zip(tweet_fav, list_of_tweet)
   sorted_zipped_lists = sorted(zipped_lists)
   sorted_list1, sorted_list2 = zip(*sorted_zipped_lists)
@@ -475,7 +517,7 @@ def number_of_like_you_get(data):
     data.Nb_of_like_on_average = round(nb_like/(data.Nb_of_comment+data.Nb_of_tweet),3)
 
 def number_of_rt_you_get(data):
-  f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"").split("retweet_count")
+  f = data.fileTweets.replace('"',"").split("retweet_count")
   nb_rt = 0
   index = 0
   for nbLike in f:    
@@ -499,13 +541,15 @@ def twitter_account_data():
   try:
     #start_time = time.time()
     print("Unziping the file")
-    unzip_file()
-    list_of_files = os.listdir(r"generate_data\twitter_data\data")
-    #print("list of files " , list_of_files)
-    if "account-creation-ip.js" not in list_of_files:  
-      print("The file provided is not twitter archive")
-      delete_data()
-      return("")
+    ca = 0
+    if ca == 1:
+      unzip_file()
+      list_of_files = os.listdir(r"generate_data\twitter_data\data")
+      #print("list of files " , list_of_files)
+      if "account-creation-ip.js" not in list_of_files:  
+        print("The file provided is not twitter archive")
+        delete_data()
+        return("")
     twitter_account_info()
     delete_data()
     #end_time = time.time()
