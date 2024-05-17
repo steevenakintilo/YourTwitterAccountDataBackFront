@@ -62,7 +62,6 @@ def delete_data():
     except:
       pass
     list_of_files = os.listdir("generate_data")
-    print("thorfin " , list_of_files)
     for file in list_of_files:
       if ".zip" in file:
         os.remove(r"generate_data/"+file)

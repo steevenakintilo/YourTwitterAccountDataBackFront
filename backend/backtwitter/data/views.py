@@ -18,6 +18,7 @@ def index(request):
 
 @csrf_exempt
 def retrieve_json_and_get_data(request):
+    print("Inside the root")
     if request.method == 'POST' and request.FILES.get('myFile'):
         try:
             uploaded_file = request.FILES['myFile']

@@ -208,7 +208,7 @@ def average_stat(data):
 def get_username_from_id(id,idx):
     S = SeleniumData()
     try:
-        S.driver.get(f"https://twitter.com/intent/user?user_id={id}")
+        S.driver.get(f"https://x.com/intent/user?user_id={id}")
         time.sleep(1.2)
         current_url = str(S.driver.current_url)
         if idx == 5:

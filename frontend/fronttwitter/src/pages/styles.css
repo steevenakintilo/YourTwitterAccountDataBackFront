@@ -90,8 +90,26 @@ h2 {
   border-radius: 10px;
   background-color: #f9f9f9;
   width: fit-content;
-  margin: 80px 200px 80px auto; /* Adjusting the margin to move more to the right */
+  margin: 80px 125px 80px auto; /* Adjusting the margin to move more to the right */
   text-align: center; /* Centering the content inside the rectangle */
+}
+
+.homeButton {
+  position: fixed;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+}
+
+.leftButton {
+  position: fixed;
+  top: 500px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+}
+
+.rightButton {
+  position: fixed;
+  top: 500px; /* Adjust as needed */
+  left: 1160px; /* Adjust as needed */
 }
 
 .likd5tweeterectangle {
@@ -160,7 +178,7 @@ h2 {
   border-radius: 10px;
   background-color: #f9f9f9;
   width: fit-content;
-  margin: 80px 200px 80px auto; /* Adjusting the margin to move more to the right */
+  margin: 80px 140px 80px auto; /* Adjusting the margin to move more to the right */
   text-align: center; /* Centering the content inside the rectangle */
 }
 
@@ -182,7 +200,7 @@ h2 {
   font-size: 20px;
   color: #000000DF;
   font-weight: 800;
-  margin-left: 20px;
+  margin-left: 90px;
 }
 
 .lightext2 {
