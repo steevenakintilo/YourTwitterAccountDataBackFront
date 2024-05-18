@@ -29,9 +29,11 @@ class StartPage extends Component {
   };
 
   onClickBtnBefore = () => {
-    this.setState((prevState) => ({
-      PageState: prevState.PageState - 1,
-    }));
+    if (this.state.PageState > 1) {
+      this.setState((prevState) => ({
+        PageState: prevState.PageState - 1,
+      }));
+    }
   };
 
 	onFileUpload = () => {
@@ -66,6 +68,7 @@ class StartPage extends Component {
           this.setState({ TwitterData });
           //dataToDisplay = TwitterData.jsonData;
           console.log("CACA response ", TwitterData.jsonData);
+          this.state.PageState = 1;
           //history.push(`/DisplayData/${TwitterData.jsonData}`);
         })
 
@@ -97,8 +100,13 @@ class StartPage extends Component {
 		return (
 			<div className="backgroundcolour">
         <button onClick={() => window.location.reload(false)} className="homeButton">HOME!</button>
-        
-				{!this.state.TwitterData && (
+        {this.state.TwitterData && (
+          <div>
+            <button onClick={this.onClickBtnNext} className="rightButton">=&gt;</button>
+            <button onClick={this.onClickBtnBefore} className="leftButton">&lt;=</button>
+          </div>
+        )}
+				{this.state.PageState === 0 && (
           <div className="backgroundcolour">
             <h1 className="styles.body">Uplokad ton archive twitter puis clique sur envoyer</h1>
             <br></br>
@@ -128,11 +136,8 @@ class StartPage extends Component {
         )}
 
 				{this.fileData()}
-        {this.state.TwitterData && (
+        {this.state.PageState === 1 && (
         <div className="backgroundcolour">
-          <button onClick={this.onClickBtnNext} className="rightButton">=&gt;</button>
-          <button onClick={this.onClickBtnBefore} className="leftButton">&lt;=</button>
-        
           <div className="mainrectangle">
             <img src={this.state.TwitterData.jsonData.ProfilePicture} alt="Profile Picture" />
             <h4><span className="lightext">Ton username est </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountUsername}</span></h4> 
