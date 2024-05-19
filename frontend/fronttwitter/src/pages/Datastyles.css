@@ -1,0 +1,266 @@
+.backgroundcolour {
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex; /* Ensures the rectangles are displayed horizontally */
+
+  /* padding: 20px; */
+  /* border-radius: 8px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.tweetcontainer {
+  max-width: 1000px;
+  display: flex; /* Ensures the rectangles are displayed horizontally */
+  padding: 20px;
+
+  /* padding: 20px; */
+  /* border-radius: 8px; */
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.short-profile-pic {
+  height: 100px;
+  width: auto; /* This maintains the aspect ratio */
+}
+
+h1 {
+  font-size: 24px;
+  color: #1da1f2;
+}
+
+a {
+  font-size: 24px;
+  color: #030658;
+}
+
+h2 {
+  font-size: 20px;
+  color: #080c3b;
+}
+
+.lightextbig {
+  font-family: 'Arial';
+  font-size: 30px;
+  color: #000000DF;
+  font-weight: 900;
+}
+
+.mainrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 0 auto; /* Centering the rectangle horizontally */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.rectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 0 auto; /* Adjusting the margin to move more to the right */
+
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.textrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 100px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.dmrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 130px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.likerectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 125px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.homeButton {
+  position: fixed;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+}
+
+.leftButton {
+  position: fixed;
+  top: 500px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+}
+
+.rightButton {
+  position: fixed;
+  top: 500px; /* Adjust as needed */
+  left: 1160px; /* Adjust as needed */
+}
+
+.likd5tweeterectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 430px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.followrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 150px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.blockrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 400px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.actionrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 10px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.longrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 350px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.tweetstatrectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 280px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+.PetitPrincerectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 80px 140px 80px auto; /* Adjusting the margin to move more to the right */
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
+
+.cofefzetainer {
+  display: flex; /* Ensures the rectangles are displayed horizontally */
+}
+
+
+.lightext {
+  font-family: 'Arial';
+  font-size: 20px;
+  color: #000000DF;
+  font-weight: 800;
+}
+
+.ligh5text {
+  font-family: 'Arial';
+  font-size: 20px;
+  color: #000000DF;
+  font-weight: 800;
+  margin-left: 90px;
+}
+
+.lightext2 {
+  font-family: 'Arial';
+  font-size: 20px;
+  color: #00749E;
+  font-weight: 500;
+}
+
+.boldtext {
+  font-family: 'Arial';
+  font-size: 40px;
+  color: #60655F;
+  font-weight: 300;
+}
+
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #084165;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0d8ef8;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.red-text {
+  color: red;
+}
+
+.black-text {
+  color: black;
+}
+
+.grey-text {
+  color: grey;
+}
+
+.darkgrey-text {
+  color: rgb(45, 44, 44);
+}
