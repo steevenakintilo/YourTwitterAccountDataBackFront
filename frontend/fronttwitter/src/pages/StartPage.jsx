@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { Component } from "react";
 import "./Datastyles.css"; // assuming your CSS file is named styles.css
 import "./data.css"; // assuming your CSS file is named styles.css
@@ -110,15 +109,9 @@ class StartPage extends Component {
 		return (
 			<div className="backgroundcolour">
         <button onClick={() => window.location.reload(false)} className="homeButton">HOME!</button>
-        {this.state.TwitterData && (
-          <div>
-            <button onClick={this.onClickBtnNext} className="rightButton">=&gt;</button>
-            <button onClick={this.onClickBtnBefore} className="leftButton">&lt;=</button>
-          </div>
-        )}
-				{this.state.PageState === 0 && (
+        {this.state.PageState === 0 && (
           <div className="backgroundcolour">
-            <h1 className="styles.body">Uplokad ton archive twitter puis clique sur envoyer</h1>
+            <h1 className="styles.body">Uplolad ton archive twitter puis clique sur envoyer</h1>
             <br></br>
             
             <a className="styles.body" href="https://help.twitter.com/fr/managing-your-account/how-to-download-your-x-archive" target="_blank"> Clique ici pour télécharger ton archive </a>
@@ -141,7 +134,11 @@ class StartPage extends Component {
             <br></br>
             <br></br>
             <h2>Toutes vos data sont supprimées après l'affichage de vos données</h2>
+            <br></br>
+            <br></br>
 
+            <h2>Sites fait par: </h2> <a className="styles.body" href="https://x.com/Twiiiiter7" target="_blank"> @Twiiiiter7 </a>
+            
           </div>
         )}
 				{this.fileData()}
@@ -155,14 +152,12 @@ class StartPage extends Component {
             <h4><span className="lightext">Tu as crée ton compte le </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountCreationDate}</span></h4> 
             <h4><span className="lightext">Ton compte a  </span> <span class="lightext2"> {this.state.TwitterData.jsonData.AccountAgeInDay}</span> <span className="lightext"> jours </span></h4> 
           </div>
-        </div>
-        )}
-      
-      {this.state.PageState === 2 && (
-        <div className="backgroundcolour">
+          <br></br>
+          <br></br>
+
           <div className="rectangle">
             <h4><span className="lightext">Depuis la création de ton compte tu as fait: </span></h4> 
-            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_total} </span> <span class="lightext"> tweets totaux tweets/commentaires/rts</span></h4> 
+            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_total} </span> <span class="lightext"> tweets/commentaires/rts</span></h4> 
             <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet} </span> <span class="lightext"> tweets </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_comment} </span> <span class="lightext"> commentaires</span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_rt} </span> <span class="lightext"> rts</span></h4> 
             <h4><span className="lightext">répondu à</span> <span className="lightext2"> {this.state.TwitterData.jsonData.UniqueRepliedUser} </span> <span className="lightext"> personnes différentes </span></h4> 
             <h4><span className="lightext">dm</span> <span className="lightext2"> {this.state.TwitterData.jsonData.UniqueDMedUser} </span> <span className="lightext"> personnes différentes </span></h4> 
@@ -172,34 +167,31 @@ class StartPage extends Component {
             <h4><span className="lightext">bloqué </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_account_blocked} </span> <span class="lightext"> comptes </span> </h4> 
             <h4><span className="lightext">tu as donc réaliser un total de </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_action} </span> <span class="lightext"> actions </span></h4> 
           </div>
-        </div>
-        )}
-      
-      {this.state.PageState === 3 && (
-        <div className="backgroundcolour">
-          <div className="rectangle">
-          <h4><span className="lightext">Niveau écriture voici le résultat: </span></h4> 
-          <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_word} </span> <span class="lightext"> mots</span></h4> 
-          <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_unique_word} </span> <span class="lightext"> mots différents </span></h4> 
-          <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_char} </span> <span class="lightext"> caractéres</span></h4> 
-          <h4><span className="lightext">En comparaison avec le Petit Prince de Antoine de Saint-Exupéry: </span></h4> 
-          <h4><span className="lightext">Le livre à </span> <span class="lightext2"> 14180 </span> <span class="lightext"> mots et </span> <span class="lightext2"> 71595 </span> <span class="lightext"> caractéres </span></h4> 
-          {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char < 1 && (
-            <h4><span className="lightext">Tu as donc écrit </span> <span class="lightext2"> {1 - this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_word} </span> <span class="lightext"> fois moins de mots et </span> <span class="lightext2"> {1 - this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char} </span> <span class="lightext"> fois moins de caractéres que le livre</span></h4> 
-          )}
-          {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char >= 1 && (
-            <h4><span className="lightext">Tu as donc écrit </span> <span class="lightext2"> {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_word} </span> <span class="lightext"> fois plus de mots et </span> <span class="lightext2"> {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char} </span> <span class="lightext"> fois plus de caractéres que le livre</span></h4> 
-          )}
           
+          <br></br>
+          <br></br>
+
+          <div className="rectangle">
+            <h4><span className="lightext">Niveau écriture sur tes tweets/commentaires voici le résultat: </span></h4> 
+            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_word} </span> <span class="lightext"> mots</span></h4> 
+            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_unique_word} </span> <span class="lightext"> mots différents </span></h4> 
+            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_char} </span> <span class="lightext"> caractéres</span></h4> 
+            <h4><span className="lightext">En comparaison avec le Petit Prince de Antoine de Saint-Exupéry: </span></h4> 
+            <h4><span className="lightext">Le livre a </span> <span class="lightext2"> 14180 </span> <span class="lightext"> mots et </span> <span class="lightext2"> 71595 </span> <span class="lightext"> caractéres </span></h4> 
+            {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char < 1 && (
+              <h4><span className="lightext">Tu as donc écrit </span> <span class="lightext2"> {1 - this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_word} </span> <span class="lightext"> fois moins de mots et </span> <span class="lightext2"> {1 - this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char} </span> <span class="lightext"> fois moins de caractéres que le livre</span></h4> 
+            )}
+            {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char >= 1 && (
+              <h4><span className="lightext">Tu as donc écrit </span> <span class="lightext2"> {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_word} </span> <span class="lightext"> fois plus de mots et </span> <span class="lightext2"> {this.state.TwitterData.jsonData.Nb_of_time_you_wrote_le_petit_prince_by_char} </span> <span class="lightext"> fois plus de caractéres que le livre</span></h4> 
+            )}  
           </div>
-        </div>
-        )}
-      
-      {this.state.PageState === 4 && (
-        <div className="backgroundcolour">
+          
+          <br></br>
+          <br></br>
+
           <div className="rectangle">
             <h4><span className="lightext">Voice quelque stat interesante sur ton compte: </span></h4> 
-            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_all_tweet_made_on_average} </span> <span class="lightext"> tweets totaux "tweets,commentaires et rts" par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_all_tweet_made_on_average_time} </span></h4>             
+            <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_all_tweet_made_on_average} </span> <span class="lightext"> tweets/commentaires/rts" par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_all_tweet_made_on_average_time} </span></h4>             
             <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_made_on_average} </span> <span class="lightext"> tweets par</span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_tweet_made_on_average_time} <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_comment_made_on_average} </span> <span class="lightext"> commentaires par</span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_comment_made_on_average_time} </span> </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_rt_made_on_average} </span> <span class="lightext"> rts par</span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_rt_made_on_average_time} </span> </h4>             
             <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_word_on_average} </span> <span class="lightext"> mots par tweets en moyenne </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_char_on_average} </span> <span class="lightext"> caractéres par tweets en moyenne </span> </h4> 
             <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_like} </span> <span class="lightext"> likes pour une moyenne de </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_like_on_average} </span> <span class="lightext"> likes par tweets </span> </h4> 
@@ -209,15 +201,9 @@ class StartPage extends Component {
             <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_follower} </span> <span class="lightext"> abonnés ce qui fait une moyenne de </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_follower_on_average} </span> <span className="lightext"> abonnés gagné par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_follower_on_average_time} </span></h4> 
             <h4> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_following} </span> <span class="lightext"> abonnement ce qui fait une moyenne de </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_following_on_average} </span> <span className="lightext"> comptes follow par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_following_on_average_time} </span></h4>
             <h4><span className="lightext"> {this.state.TwitterData.jsonData.Nb_of_action_on_average} </span> <span className="lightext"> actions par </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Nb_of_action_time} </span></h4>
-
           </div>
-        </div>
-        )}
-
-
-      {this.state.PageState === 5 && (
-        <div className="backgroundcolour">
-          <h4 className="lightext">Voici le top 5 des personnes à qui tu as le plus répondu</h4>
+          
+          <h4 className="lightext">Voici le top 5 des personnes à qui tu as le plus répondu en commentaire</h4>
             <div className="rectangle">
               {this.state.TwitterData.jsonData.Top5RepliedUser.slice(0, 5).map((user, index) => (
                 <li key={index}>
@@ -226,11 +212,7 @@ class StartPage extends Component {
               ))}
             </div>
           <br></br>
-        </div>
-        )}
-
-      {this.state.PageState === 6 && (
-        <div className="backgroundcolour">
+          
           <div className="lightext">Top 5 de tes tweets les plus liké</div>
           <ul>
             <div className="rectangle">
@@ -242,32 +224,19 @@ class StartPage extends Component {
                 ))}
             </div>
             <br></br>
-          </ul>            
-        </div>
-        )}
-
-      {this.state.PageState === 7 && (
-        <div className="backgroundcolour">
-        <h4 className="lightext">Voici le top 5 des personnes à qui tu as le plus parlé en dm</h4>
+          </ul>
+          
+          <h4 className="lightext">Voici le top 5 des personnes à qui tu as le plus parlé en dm</h4>
             <div className="rectangle">
             {this.state.TwitterData.jsonData.Top5RepliedUser.slice(0, 5).map((user, index) => (
               <li key={index}>
+                <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUser[index]} </span> <span className="lightext"> : </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserNb[index]} </span> <span className="lightext"> fois ce qui représente </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserPercent[index]} </span> <span className="lightext"> % de tes dm </span></h4>
                 <a className="styles.body" href={`https://x.com/intent/user?user_id=${this.state.TwitterData.jsonData.Top5DMedUser[index]}`} target="_blank">Clique ici pour le voir</a>
-                <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUser[index]} </span> <span className="lightext"> : </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserNb[index]} </span> <span className="lightext"> ce qui représente </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserPercent[index]} </span> <span className="lightext"> % de tes dm </span></h4>
               </li>
           ))}
           </div>
-        </div>
+        </div>      
         )}
-			
-      {this.state.PageState === 8 && (
-        <div className="backgroundcolour">
-            <div className="rectangle">
-            <h4>FIN</h4>
-          </div>
-        </div>
-        )}
-			
       </div>
 		);
 	}
