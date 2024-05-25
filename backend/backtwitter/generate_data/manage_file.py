@@ -62,6 +62,7 @@ def delete_data():
     except:
       pass
     list_of_files = os.listdir("generate_data")
+    print("list of files " , list_of_files)
     for file in list_of_files:
       if ".zip" in file:
         os.remove(r"generate_data/"+file)

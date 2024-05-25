@@ -69,8 +69,13 @@ class StartPage extends Component {
           this.setState({ TwitterData });
           //dataToDisplay = TwitterData.jsonData;
           console.log("CACA response ", TwitterData.jsonData);
-          this.state.PageState = 1;
-          //history.push(`/DisplayData/${TwitterData.jsonData}`);
+          if (TwitterData.jsonData === "WrongFile"){
+            alert("Le fichier envoyé n'est pas ton archive twitter");              
+          }
+          else { 
+            this.state.PageState = 1;
+          }
+            //history.push(`/DisplayData/${TwitterData.jsonData}`);
         })
 
         .catch(error => {
@@ -137,7 +142,7 @@ class StartPage extends Component {
             <br></br>
             <br></br>
 
-            <h2>Sites fait par: </h2> <a className="styles.body" href="https://x.com/Twiiiiter7" target="_blank"> @Twiiiiter7 </a>
+            <h2>Site fait par: </h2> <a className="styles.body" href="https://x.com/Twiiiiter7" target="_blank"> @Twiiiiter7 </a>
             
           </div>
         )}

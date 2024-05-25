@@ -34,13 +34,15 @@ def retrieve_json_and_get_data(request):
 
             # Process the uploaded file
             from generate_data import data
-            data.twitter_account_data()
+            jsonData = data.twitter_account_data()
 
             # Load JSON data from the generated file
-            with open(r"generate_data/data.json") as json_file:
-                jsonData = json.load(json_file)
+            #with open(r"generate_data/data.json") as json_file:
+            #    jsonData = json.load(json_file)
 
-            os.remove(r"generate_data/data.json")
+            #os.remove(r"generate_data/data.json")
+            if jsonData == False:
+                return JsonResponse({"jsonData": "WrongFile", 'message': 'File is not a twitter archive.'})
             return JsonResponse({"jsonData": jsonData, 'message': 'File processed successfully.'})
         except Exception as e:
             print("Error:")

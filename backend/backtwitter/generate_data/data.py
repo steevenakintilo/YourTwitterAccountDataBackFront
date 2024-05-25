@@ -97,31 +97,30 @@ class AccountData():
   
 
 class SeleniumData():
-  options = webdriver.ChromeOptions()
-  options.add_argument('--blink-settings=imagesEnabled=false')
-  options.add_argument("--log-level=3")  # Suppress all logging levels
-  options.add_argument("--window-size=1920,1080")
-  # C:\Users\your_username\AppData\Local\Google\Chrome\User Data
-  #Replace your_username with your username
-  #and Profile 3 by your profile number
-  # Everything is explained on the readme
+  # options = webdriver.ChromeOptions()
+  # options.add_argument('--blink-settings=imagesEnabled=false')
+  # options.add_argument("--log-level=3")  # Suppress all logging levels
+  # options.add_argument("--window-size=1920,1080")
+  # # C:\Users\your_username\AppData\Local\Google\Chrome\User Data
+  # #Replace your_username with your username
+  # #and Profile 3 by your profile number
+  # # Everything is explained on the readme
 
-  options.add_argument(r"--user-data-dir=C:\Users\sakin\AppData\Local\Google\Chrome\User Data\Profile 3")
-  options.add_argument(r'--profile-directory=Profile 3')
-  #options.add_argument('headless')
-  driver = webdriver.Chrome(options=options)  # You can change this to whichever browser you prefer and have installed
-  username_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[5]/label/div/div[2]/div/input'  
-  button_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[6]/div'
-  password_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input'
-  login_button_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/div/div'
-
+  # options.add_argument(r"--user-data-dir=C:\Users\sakin\AppData\Local\Google\Chrome\User Data\Profile 3")
+  # options.add_argument(r'--profile-directory=Profile 3')
+  # #options.add_argument('headless')
+  # driver = webdriver.Chrome(options=options)  # You can change this to whichever browser you prefer and have installed
+  # username_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[5]/label/div/div[2]/div/input'  
+  # button_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div/div/div/div[6]/div'
+  # password_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div/label/div/div[2]/div[1]/input'
+  # login_button_xpath = '//*[@id="layers"]/div/div/div/div/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[1]/div/div/div/div'
+  ok = "a"
 
 def get_zip_data(data):
   zip_path = "generate_data/"+current_zip_file()
   #f = str(print_file_info(r'generate_data\twitter_data\data\profile.js').replace('"',"").split("avatarMediaUrl")[1]).split("\n")[0].replace(":","").replace(",","").replace(" " ,"").strip('')
   with zipfile.ZipFile(zip_path, 'r') as zip_ref:
       # List all the contents of the zip file
-      print("Files in the zip archive:")              
       file_name_list = ["data/profile.js","data/account.js","data/direct-messages.js","data/tweets.js","data/block.js","data/like.js","data/follower.js","data/following.js"]
       file_content_list = []
       # Read the content of the specified file
@@ -206,17 +205,18 @@ def average_stat(data):
   data.Nb_of_action_on_average = int(data.Nb_of_action_on_average)
   
 def get_username_from_id(id,idx):
-    S = SeleniumData()
-    try:
-        S.driver.get(f"https://x.com/intent/user?user_id={id}")
-        time.sleep(1.2)
-        current_url = str(S.driver.current_url)
-        if idx == 5:
-          S.driver.close()
+    return(id)
+    # S = SeleniumData()
+    # try:
+    #     S.driver.get(f"https://x.com/intent/user?user_id={1359462422604619778}")
+    #     time.sleep(1.2)
+    #     current_url = str(S.driver.current_url)
+    #     if idx == 5:
+    #       S.driver.close()
         
-        return (current_url.split("=")[1])
-    except:
-        return("error")
+    #     return (current_url.split("=")[1])
+    # except:
+    #     return("error")
 
 def convert_seconds_to_hms(seconds):
   hours = seconds // 3600
@@ -225,8 +225,7 @@ def convert_seconds_to_hms(seconds):
 
   return hours, minutes, remaining_seconds
 
-def twitter_account_info():
-  data = AccountData()
+def twitter_account_info(data):
   print("Inside twitter_account_info function")
   #print("Start")
   get_zip_data(data)
@@ -318,13 +317,13 @@ def write_data_to_json(data):
  
   data.dataJson = json_object
   # Writing to sample.json
-  with open("generate_data/data.json", "w") as outfile:
-      outfile.write(json_object)
+  #with open("generate_data/data.json", "w") as outfile:
+  #    outfile.write(json_object)
 
 def get_profile_picture(data):
   #f = str(print_file_info(r'generate_data\twitter_data\data\profile.js').replace('"',"").split("avatarMediaUrl")[1]).split("\n")[0].replace(":","").replace(",","").replace(" " ,"").strip('')
-  f = data.fileProfile.replace('"',"").split("avatarMediaUrl")[1].split("\n")[0].replace(":","").replace(",","").replace(" " ,"").strip('')
-  data.ProfilePicture = f
+  f = data.fileProfile.replace('"',"").split("avatarMediaUrl")[1].split("\n")[0].replace(",","").replace(" " ,"").strip('')
+  data.ProfilePicture = f[1:(len(f))]
 
 def basic_account_data(data):
   #f = print_file_info(r'generate_data\twitter_data\data\account.js').split("\n")
@@ -541,27 +540,13 @@ def twitter_account_data():
   try:
     #start_time = time.time()
     print("Unziping the file")
-    ca = 0
-    if ca == 1:
-      unzip_file()
-      list_of_files = os.listdir(r"generate_data\twitter_data\data")
-      #print("list of files " , list_of_files)
-      if "account-creation-ip.js" not in list_of_files:  
-        print("The file provided is not twitter archive")
-        delete_data()
-        return("")
-    twitter_account_info()
+    data = AccountData()
+    twitter_account_info(data)
     delete_data()
-    #end_time = time.time()
-    #elapsed_time = end_time - start_time
-    #hours, minutes, remaining_seconds = convert_seconds_to_hms(int(elapsed_time))
-    # with open("data.json", 'w') as f:
-    #   json.dump({}, f)
-    # #print(f"It tooks {hours} hours, {minutes} minutes, and {remaining_seconds} seconds.")
     print("Everything went well good")
-    return True
+    return json.loads(data.dataJson)
   except:
-    traceback.print_exc()
+    #traceback.print_exc()
     delete_data()
     print("Everything went bad")
     return (False)

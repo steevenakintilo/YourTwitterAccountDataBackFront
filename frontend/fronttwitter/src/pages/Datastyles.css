@@ -58,17 +58,6 @@ h2 {
   text-align: center; /* Centering the content inside the rectangle */
 }
 
-.rectangle {
-  border: 10px solid black;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  width: fit-content;
-  margin: 0 auto; /* Adjusting the margin to move more to the right */
-
-  text-align: center; /* Centering the content inside the rectangle */
-}
-
 .textrectangle {
   border: 10px solid black;
   padding: 20px;
@@ -105,16 +94,35 @@ h2 {
   left: 20px; /* Adjust as needed */
 }
 
+.rectangle {
+  border: 10px solid black;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: fit-content;
+  margin: 0 auto; /* Adjusting the margin to move more to the right */
+
+  text-align: center; /* Centering the content inside the rectangle */
+}
+
 .leftButton {
   position: fixed;
   top: 500px; /* Adjust as needed */
   left: 20px; /* Adjust as needed */
+  margin: 0 auto; /* Adjusting the margin to move more to the right */
+  width: fit-content;
+  text-align: center; /* Centering the content inside the rectangle */
+
 }
 
 .rightButton {
   position: fixed;
   top: 500px; /* Adjust as needed */
-  left: 1160px; /* Adjust as needed */
+  left: 1490px; /* Adjust as needed */
+  margin: 0 auto; /* Adjusting the margin to move more to the right */
+  width: fit-content;
+  text-align: center; /* Centering the content inside the rectangle */
+
 }
 
 .likd5tweeterectangle {
