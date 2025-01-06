@@ -236,7 +236,8 @@ class StartPage extends Component {
             {this.state.TwitterData.jsonData.Top5RepliedUser.slice(0, 5).map((user, index) => (
               <li key={index}>
                 <h4><span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUser[index]} </span> <span className="lightext"> : </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserNb[index]} </span> <span className="lightext"> fois ce qui représente </span> <span className="lightext2"> {this.state.TwitterData.jsonData.Top5DMedUserPercent[index]} </span> <span className="lightext"> % de tes dm </span></h4>
-                <a className="styles.body" href={`https://x.com/intent/user?user_id=${this.state.TwitterData.jsonData.Top5DMedUser[index]}`} target="_blank">Clique ici pour le voir</a>
+                {/* <a className="styles.body" href={`https://x.com/intent/user?user_id=${this.state.TwitterData.jsonData.Top5DMedUser[index]}`} target="_blank">Clique ici pour le voir</a> */}
+                <a className="styles.body" href={`https://x.com/${this.state.TwitterData.jsonData.Top5DMedUser[index]}`} target="_blank">Clique ici pour le voir</a>
               </li>
           ))}
           </div>

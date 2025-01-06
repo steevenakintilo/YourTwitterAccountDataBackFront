@@ -96,6 +96,8 @@ class AccountData():
   
   
 
+
+
 class SeleniumData():
   # options = webdriver.ChromeOptions()
   # options.add_argument('--blink-settings=imagesEnabled=false')
@@ -311,8 +313,7 @@ def write_data_to_json(data):
   }
 
 
-      
-  
+
   json_object = json.dumps(data.WholeAccountData, indent=4)
  
   data.dataJson = json_object
@@ -373,15 +374,18 @@ def number_of_dm(data):
   if len(sorted_list1) >= 6:
     for i in range(1,6):
       od = get_username_from_id(str(sorted_list2[-i]),i)
-      data.Top5DMedUser.append(od)
+      #data.Top5DMedUser.append(od)
+      usernameDM = id_to_username(od)
+      data.Top5DMedUser.append(usernameDM)
       data.Top5DMedUserNb.append(sorted_list1[-i])
       data.Top5DMedUserPercent.append(round(float((sorted_list1[-i]/len(list_of_user)) * 100),1))
   else:
     for i in range(1,len(sorted_list1)):
-      data.Top5DMedUser.append(sorted_list2[-i],i)
+      #data.Top5DMedUser.append(sorted_list2[-i])
+      usernameDM = id_to_username(sorted_list2[-i])
+      data.Top5DMedUser.append(usernameDM)
       data.Top5DMedUserNb.append(sorted_list1[-i])
       data.Top5DMedUserPercent.append(round(float((sorted_list1[-i]/len(list_of_user)) * 100),1))
-  
 def number_of_word(data):
   #f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"").split("full_text")
   f = data.fileTweets.replace('"',"").split("full_text")
@@ -409,7 +413,25 @@ def number_of_word(data):
   data.Nb_of_time_you_wrote_le_petit_prince_by_word = round((data.Nb_of_word/data.Nb_of_word_in_the_petit_prince),1)
   data.Nb_of_time_you_wrote_le_petit_prince_by_char = round((data.Nb_of_char/data.Nb_of_char_in_the_petit_prince),1)
   
-  
+
+def id_to_username(id):
+  options = webdriver.ChromeOptions()
+  options.add_argument('--log-level=1')
+  options.add_argument("--log-level=3")  # Suppress all logging levels
+  options.add_argument('headless')
+  options.add_argument('--blink-settings=imagesEnabled=false')
+  options.add_argument("--disable-gpu")  # Disable GPU (helpful in headless mode)
+  options.add_argument("--disable-dev-shm-usage")  # Prevent shared memory issues
+  driver = webdriver.Chrome(options=options)
+  driver.get(f"https://x.com/intent/user?user_id={id}")
+  for i in range(100000):
+    user = str(driver.current_url).split("=")[1]
+    time.sleep(0.01)
+    if "&mx" not in user:
+      break
+  driver.close()
+  return user
+
 def number_of_tweet(data):
   #f = print_file_info(r'generate_data\twitter_data\data\tweets.js').replace('"',"")
   f = data.fileTweets.replace('"',"")
@@ -489,7 +511,7 @@ def number_of_like_you_get(data):
       else:
         try:
           nb_like+=int(userLike)
-          list_of_tweet.append("https://twitter.com/i/web/status/"+tweetId)
+          list_of_tweet.append("https://x.com/i/web/status/"+tweetId)
           tweet_fav.append(int(userLike))
         except:
           pass
